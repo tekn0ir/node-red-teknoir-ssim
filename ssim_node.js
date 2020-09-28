@@ -87,8 +87,8 @@ module.exports = function (RED) {
             try {
                 getImage(node, msg, node.baseline, node.baselineType, function (err, baselineImage) {
                     if (!baselineImage) {
-                        node.status({fill: "blue", shape: "dot", text: "No baseline image - SSIM: 1"});
-                        msg["ssim"] = 1.0;
+                        node.status({fill: "blue", shape: "dot", text: "No baseline image - SSIM: 0"});
+                        msg["ssim"] = 0.0;
                         node.send(msg);
                     } else {
                         getImage(node, msg, node.image, node.imageType, function (err, image) {
