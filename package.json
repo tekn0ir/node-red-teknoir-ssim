@@ -1,0 +1,33 @@
+{
+    "name": "node-red-teknoir-ssim",
+    "version": "0.0.1",
+    "description": "Structural Similarity Index Node for Node Red.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tekn0ir/node-red-teknoir-ssim.git"
+    },
+    "keywords": [
+        "ssim",
+        "node-red",
+        "node",
+        "teknoir"
+    ],
+    "node-red": {
+        "nodes": {
+            "ssim": "ssim_node.js"
+        }
+    },
+    "author": {
+        "name": "Anders Åslund"
+    },
+    "dependencies": {
+        "is-base64": "^1.1.0",
+        "@jimp/plugin-color": "^0.16.1",
+        "jimp": "^0.16.1",
+        "ssim.js": "^3.3.0"
+    }
+}

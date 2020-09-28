@@ -1,0 +1,79 @@
+<script type="text/x-red" data-template-name="ssim">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Structural Similarity Index">
+    </div>
+	<div class="form-row">
+		<label style="padding-top: 8px" for="node-input-baseline"><i class="fa fa-file-image-o"></i> Baseline</label>
+		<input type="text" id="node-input-baseline" style="width:70%">
+		<input type="hidden" id="node-input-baselineType">
+	</div>
+		<div class="form-row">
+		<label style="padding-top: 8px" for="node-input-image"><i class="fa fa-file-image-o"></i> Image</label>
+		<input type="text" id="node-input-image" style="width:70%">
+		<input type="hidden" id="node-input-imageType">
+	</div>
+
+</script>
+
+<script type="text/x-red" data-help-name="ssim">
+    <p>A node that calculate Structural Similarity Index (SSIM) between images</p>
+    <p>Usage:</p>
+    <ol>
+        <li>Add the ssim node to your flow and connect a stream of images.</li>
+        <li>Images will be compared to baseline. If no baseline ssim will be 1.</li>
+        <li>Image on will be passed to the output, together with ssim value.</li>
+    </ol>
+</script>
+
+
+<script type="text/javascript">
+    (function () {
+        RED.nodes.registerType('ssim', {
+                category: 'image tools',
+                defaults: {
+                    name: {value: ''},
+                    baseline: {
+                        value: "payload",
+                        required: true,
+                        validate: RED.validators.typedInput("baselineType")
+                    },
+                    baselineType: {
+                        value: "flow"
+                    },
+                    image: {
+                        value: "payload",
+                        required: true,
+                        validate: RED.validators.typedInput("imageType")
+                    },
+                    imageType: {
+                        value: "msg"
+                    }
+                },
+                color: 'rgb(215, 201, 194)',
+                inputs: 1,
+                outputs: 1,
+                icon: "tn_dark.svg",
+                paletteLabel: 'ssim',
+                label: function () {
+                    return this.name || 'ssim';
+                },
+                oneditprepare: function () {
+                    let node = this;
+
+                    $('#node-input-baseline').typedInput({
+                        default: 'msg',
+                        typeField: $("#node-input-baselineType"),
+                        types: ['flow', 'global']
+                    });
+
+                    $('#node-input-image').typedInput({
+                        default: 'msg',
+                        typeField: $("#node-input-imageType"),
+                        types: ['msg', 'flow', 'global']
+                    });
+                }
+            }
+        );
+    })();
+</script>
